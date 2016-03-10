@@ -18,7 +18,7 @@
     <form method="post">
         <fieldset style="background-color: orange">
             <legend><strong>Informatieverzoek</strong></legend>
-            <input type="reset" value="Reset">
+            <input type="reset" value="Reset" onclick="removeAlleLagen()">
             <h2>Stap 1: De samenstelling</h2>
             
             <p>
@@ -44,8 +44,8 @@
             <div id="laag1">
                 <p>
                     <label>Laag 1:</label> 
-                    <button id="addButton" type="button" onclick="addLaag()">Extra laag</button>
-                    <button id="removeButton" type="button" onclick="removeLaag()">Laag weg</button>
+                    <button id="addButton" type="button" onclick="addLaag()">+</button>
+                    <button id="removeButton" type="button" onclick="removeLaag()">-</button>
                 </p>
 
                 <p>
@@ -144,16 +144,28 @@
     var currentLaag = 1;
 
     var laagDiv = document.getElementById("laag1");
-    
+
     function removeLaag() {
         var className = "elementsLaag" + currentLaag;
-        var elements =  document.getElementsByClassName(className);
-        while(elements.length > 0){
+        var elements = document.getElementsByClassName(className);
+        while (elements.length > 0) {
             elements[0].parentNode.removeChild(elements[0]);
         }
 
         if (currentLaag > 1) {
             currentLaag = currentLaag - 1;
+        }
+    }
+
+    function removeAlleLagen() {
+        while (currentLaag > 1)
+        {
+            var className = "elementsLaag" + currentLaag;
+            var elements = document.getElementsByClassName(className);
+            while (elements.length > 0) {
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+        currentLaag -= 1;        
         }
     }
 
